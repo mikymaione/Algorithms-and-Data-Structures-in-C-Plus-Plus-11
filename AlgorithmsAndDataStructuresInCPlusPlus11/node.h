@@ -16,21 +16,24 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #include <memory>
 
 template <typename T>
-class node
+class node : public std::enable_shared_from_this<node<T>>
 {
 private:
 	T v;
-	std::unique_ptr<node> l;
-	std::unique_ptr<node> r;
+	std::shared_ptr<node<T>> l {nullptr};
+	std::shared_ptr<node<T>> r {nullptr};
 
 public:
 	// costructor
-	node(T z);
+	node(const T z);
 
-	// editing	
+	// editing
 	void insert(T z);
 
-	// print routines	
+	// searching
+	std::shared_ptr<node<T>> search(T z);
+
+	// printing
 	void pre_order(std::function<void(T)> printFn);
 
 	void in_order(std::function<void(T)> printFn);

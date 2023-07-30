@@ -16,31 +16,49 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #include <memory>
 #include "node.h"
 
+
 // costructor
 template<typename T>
-node<T>::node(T z) :v(z) {}
+node<T>::node(const T z) :v(z) {}
+
 
 // editing
 template<typename T>
 inline void node<T>::insert(T z)
 {
-	if (v < z)
+	if (z < v)
 	{
 		if (l)
 			l->insert(z);
 		else
-			l = std::make_unique<node>(z);
+			l = std::make_shared<node>(z);
 	}
 	else
 	{
 		if (r)
 			r->insert(z);
 		else
-			r = std::make_unique<node>(z);
+			r = std::make_shared<node>(z);
 	}
 }
 
-// print routines
+
+// searching
+template<typename T>
+std::shared_ptr<node<T>> node<T>::search(T z)
+{
+	if (v == z)
+		return this->shared_from_this();
+	else if (l && z < v)
+		return l->search(z);
+	else if (r && z >= v)
+		return r->search(z);
+	else
+		return nullptr;
+}
+
+
+// printing
 template<typename T>
 void node<T>::pre_order(std::function<void(T)> printFn)
 {
