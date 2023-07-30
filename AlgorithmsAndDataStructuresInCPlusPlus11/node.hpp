@@ -91,10 +91,10 @@ void node<T>::pre_order(std::function<void(T)> printFn)
 	printFn(v);
 
 	if (l)
-		l->in_order(printFn);
+		l->pre_order(printFn);
 
 	if (r)
-		r->in_order(printFn);
+		r->pre_order(printFn);
 }
 
 template<typename T>
@@ -113,10 +113,10 @@ template<typename T>
 inline void node<T>::post_order(std::function<void(T)> printFn)
 {
 	if (l)
-		l->in_order(printFn);
+		l->post_order(printFn);
 
 	if (r)
-		r->in_order(printFn);
+		r->post_order(printFn);
 
 	printFn(v);
 }
