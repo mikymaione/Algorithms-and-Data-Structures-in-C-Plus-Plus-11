@@ -27,11 +27,16 @@ public:
 	// costructor
 	node(const T z);
 
+	// value
+	T value();
+
 	// editing
 	void insert(T z);
 
 	// searching
 	std::shared_ptr<node<T>> search(T z);
+	std::shared_ptr<node<T>> minimum();
+	std::shared_ptr<node<T>> maximum();
 
 	// printing
 	void pre_order(std::function<void(T)> printFn);

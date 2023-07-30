@@ -22,6 +22,14 @@ template<typename T>
 node<T>::node(const T z) :v(z) {}
 
 
+// value
+template<typename T>
+T node<T>::value()
+{
+	return v;
+}
+
+
 // editing
 template<typename T>
 inline void node<T>::insert(T z)
@@ -55,6 +63,24 @@ std::shared_ptr<node<T>> node<T>::search(T z)
 		return r->search(z);
 	else
 		return nullptr;
+}
+
+template<typename T>
+std::shared_ptr<node<T>> node<T>::minimum()
+{
+	if (l)
+		return l->minimum();
+	else
+		return this->shared_from_this();
+}
+
+template<typename T>
+std::shared_ptr<node<T>> node<T>::maximum()
+{
+	if (r)
+		return r->maximum();
+	else
+		return this->shared_from_this();
 }
 
 

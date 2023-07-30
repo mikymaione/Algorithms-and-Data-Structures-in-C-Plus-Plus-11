@@ -43,6 +43,12 @@ int main()
 	std::cout << std::endl;
 
 	// searching
+	auto minimum = t->minimum();
+	std::cout << "Mimum: " << minimum->value() << std::endl;
+
+	auto maximum = t->maximum();
+	std::cout << "Maximum: " << maximum->value() << std::endl;
+
 	std::cout << "Search for: 5 (that is present)" << std::endl;
 	auto n5 = t->search(5);
 	if (n5)
