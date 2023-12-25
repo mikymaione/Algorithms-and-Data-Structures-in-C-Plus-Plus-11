@@ -16,109 +16,100 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #include <memory>
 #include "node.h"
 
-
 // costructor
 template<typename T>
-node<T>::node(const T z) :v(z) {}
+node<T>::node(const T z) : v(z) {
+}
 
 
 // value
 template<typename T>
-T node<T>::value()
-{
-	return v;
+T node<T>::value() {
+    return v;
 }
 
 
 // editing
 template<typename T>
-inline void node<T>::insert(T z)
-{
-	if (z < v)
-	{
-		if (l)
-			l->insert(z);
-		else
-			l = std::make_shared<node>(z);
-	}
-	else
-	{
-		if (r)
-			r->insert(z);
-		else
-			r = std::make_shared<node>(z);
-	}
+void node<T>::insert(T z) {
+    if (z < v) {
+        if (l)
+            l->insert(z);
+        else
+            l = std::make_shared<node>(z);
+    } else {
+        if (r)
+            r->insert(z);
+        else
+            r = std::make_shared<node>(z);
+    }
 }
 
 
 // searching
 template<typename T>
-std::shared_ptr<node<T>> node<T>::search(T z)
-{
-	if (v == z)
-		return this->shared_from_this();
-	else if (l && z < v)
-		return l->search(z);
-	else if (r && z >= v)
-		return r->search(z);
-	else
-		return nullptr;
+std::shared_ptr<node<T> > node<T>::search(T z) {
+    if (v == z)
+        return this->shared_from_this();
+
+    if (l && z < v)
+        return l->search(z);
+
+    if (r && z >= v)
+        return r->search(z);
+
+    return nullptr;
 }
 
 template<typename T>
-std::shared_ptr<node<T>> node<T>::minimum()
-{
-	if (l)
-		return l->minimum();
-	else
-		return this->shared_from_this();
+std::shared_ptr<node<T> > node<T>::minimum() {
+    if (l)
+        return l->minimum();
+
+    return this->shared_from_this();
 }
 
 template<typename T>
-std::shared_ptr<node<T>> node<T>::maximum()
-{
-	if (r)
-		return r->maximum();
-	else
-		return this->shared_from_this();
+std::shared_ptr<node<T> > node<T>::maximum() {
+    if (r)
+        return r->maximum();
+
+    return this->shared_from_this();
 }
 
 
 // printing
 template<typename T>
-void node<T>::pre_order(std::function<void(T)> printFn)
-{
-	printFn(v);
+void node<T>::pre_order(std::function<void(T)> printFn) {
+    printFn(v);
 
-	if (l)
-		l->pre_order(printFn);
+    if (l)
+        l->pre_order(printFn);
 
-	if (r)
-		r->pre_order(printFn);
+    if (r)
+        r->pre_order(printFn);
 }
 
 template<typename T>
-void node<T>::in_order(std::function<void(T)> printFn)
-{
-	if (l)
-		l->in_order(printFn);
+void node<T>::in_order(std::function<void(T)> printFn) {
+    if (l)
+        l->in_order(printFn);
 
-	printFn(v);
+    printFn(v);
 
-	if (r)
-		r->in_order(printFn);
+    if (r)
+        r->in_order(printFn);
 }
 
 template<typename T>
-inline void node<T>::post_order(std::function<void(T)> printFn)
-{
-	if (l)
-		l->post_order(printFn);
+void node<T>::post_order(std::function<void(T)> printFn) {
+    if (l)
+        l->post_order(printFn);
 
-	if (r)
-		r->post_order(printFn);
+    if (r)
+        r->post_order(printFn);
 
-	printFn(v);
+    printFn(v);
 }
 
 #endif

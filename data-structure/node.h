@@ -15,37 +15,37 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 #include <functional>
 #include <memory>
 
-template <typename T>
-class node : public std::enable_shared_from_this<node<T>>
-{
-private:
-	T v;
-	std::shared_ptr<node<T>> l {nullptr};
-	std::shared_ptr<node<T>> r {nullptr};
+template<typename T>
+class node : public std::enable_shared_from_this<node<T> > {
+    T v;
+    std::shared_ptr<node> l{nullptr};
+    std::shared_ptr<node> r{nullptr};
 
 public:
-	// costructor
-	node(const T z);
+    // costructor
+    explicit node(T z);
 
-	// value
-	T value();
+    // value
+    T value();
 
-	// editing
-	void insert(T z);
+    // editing
+    void insert(T z);
 
-	// searching
-	std::shared_ptr<node<T>> search(T z);
-	std::shared_ptr<node<T>> minimum();
-	std::shared_ptr<node<T>> maximum();
+    // searching
+    std::shared_ptr<node> search(T z);
 
-	// printing
-	void pre_order(std::function<void(T)> printFn);
+    std::shared_ptr<node> minimum();
 
-	void in_order(std::function<void(T)> printFn);
+    std::shared_ptr<node> maximum();
 
-	void post_order(std::function<void(T)> printFn);
+    // printing
+    void pre_order(std::function<void(T)> printFn);
+
+    void in_order(std::function<void(T)> printFn);
+
+    void post_order(std::function<void(T)> printFn);
 };
 
 #include "node.hpp"
 
-#endif
+#endif //NODE_H
