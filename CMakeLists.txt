@@ -5,4 +5,6 @@ set(CMAKE_CXX_STANDARD 23)
 
 add_executable(Algorithms_and_Data_Structures_in_C_Plus_Plus_11 main.cpp
         data-structure/node.hpp
-        data-structure/node.h)
+        data-structure/node.h
+        programs/tree.cpp
+        programs/tree.h)
