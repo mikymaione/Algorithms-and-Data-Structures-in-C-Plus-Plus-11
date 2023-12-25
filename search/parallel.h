@@ -9,10 +9,24 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
-#include <memory>
-#include "search/parallel.h"
+#ifndef PARALLEL_H
+#define PARALLEL_H
 
-int main() {
-    const auto t = std::make_unique<parallel>();
-    t->run();
-}
+#include <string>
+#include <vector>
+
+class parallel {
+    std::atomic<int> occurrence;
+
+    static std::vector<std::string_view> split(std::string_view str, char delim);
+
+    void find_occurrence_in_vector(const std::vector<std::string_view> &content, const std::string &word, size_t from,
+                                   size_t to);
+
+public:
+    static void run();
+
+    int find_occurrence(const std::string &content, char delim, const std::string &word);
+};
+
+#endif //PARALLEL_H
